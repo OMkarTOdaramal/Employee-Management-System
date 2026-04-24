@@ -22,4 +22,9 @@ public class EmployeeService {
         return modelMapper.map(employee,EmployeeDto.class);
     }
 
+    public EmployeeDto createNewEmployee(EmployeeDto employeeDto) {
+         Employee newEmployee = modelMapper.map(employeeDto,Employee.class);
+         Employee savedEmployee = employeeRepository.save(newEmployee);
+         return modelMapper.map(savedEmployee,EmployeeDto.class);
+    }
 }

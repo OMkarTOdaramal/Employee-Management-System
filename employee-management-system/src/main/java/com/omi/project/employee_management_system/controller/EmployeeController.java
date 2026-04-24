@@ -3,11 +3,9 @@ package com.omi.project.employee_management_system.controller;
 import com.omi.project.employee_management_system.dto.EmployeeDto;
 import com.omi.project.employee_management_system.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,4 +20,9 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeDto);
     }
 
+    @PostMapping
+    public ResponseEntity<EmployeeDto> createNewEmployee(@RequestBody EmployeeDto employeeDto){
+        EmployeeDto createdEmployeeDto = employeeService.createNewEmployee(employeeDto);
+        return new ResponseEntity<>(createdEmployeeDto, HttpStatus.CREATED);
+    }
 }
